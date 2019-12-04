@@ -11,7 +11,7 @@ class Content extends React.Component {
   };
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("http://localhost:3000/posts")
       .then(response => response.json())
       .then(json => {
         this.setState({
@@ -22,17 +22,42 @@ class Content extends React.Component {
   }
 
   handleDelete = id => {
-    const url = `{https://jsonplaceholder.typicode.com/users/${id}}`;
-    console.log("id", id, "url", url);
-    // this.setState(prevState => ({
-    //   items: prevState.items.filter(el => el !== id)
-    // }));
+    const url = `http://localhost:3000/posts/${id}`;
     fetch(url, {
       method: "DELETE"
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
+        console.log("del", json);
+        this.setState(prevState => ({
+          items: prevState.items.filter(el => el.id !== id)
+        }));
+      });
+  };
+
+  handleEdit = id => {
+    const url = `https://jsonplaceholder.typicode.com/posts/${id}`;
+    const getId = id;
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify({
+        userId: getId,
+        id: getId,
+        title: "title",
+        body: "body"
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        const { items: here } = this.state;
+        const updatedItem = json;
+        here.splice(id - 1, 1, updatedItem);
+        this.setState({ items: here });
+
       });
   };
 
@@ -42,34 +67,20 @@ class Content extends React.Component {
       <>
         {isLoaded &&
           items.map(item => {
-            const {
-              id,
-              name,
-              username,
-              email,
-              address: { street, city, zipcode },
-              phone,
-              company: { name: companyName, bs }
-            } = item;
+            const { id, title, body } = item;
             return (
               <div key={uuid()} className="wrapper">
                 <div className="title">
-                  <h3>{name}</h3>
+                  <h3>{title}</h3>
                   <span>
                     {id}
-                    <button>edit</button>
+                    <button onClick={() => this.handleEdit(id)}>edit</button>
                     <button onClick={() => this.handleDelete(id)}>del</button>
                   </span>
                 </div>
                 <div className="content">
-                  <p>{username}</p>
-                  <p>{email}</p>
-                  <p>{street}</p>
-                  <p>{city}</p>
-                  <p>{zipcode}</p>
-                  <p>{phone}</p>
-                  <p>{companyName}</p>
-                  <p>{bs}</p>
+                  <p>{body}</p>
+                  <p>{body}</p>
                 </div>
               </div>
             );
