@@ -36,7 +36,7 @@ class Content extends React.Component {
   };
 
   handleEdit = id => {
-    const url = `https://jsonplaceholder.typicode.com/posts/${id}`;
+    const url = `http://localhost:3000/posts/${id}`;
     const getId = id;
     fetch(url, {
       method: "PUT",
