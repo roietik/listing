@@ -1,0 +1,38 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+body {   
+  background: lightgray;
+}
+.title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid darkgray;
+}
+.title h3 {
+  justify-self: start;
+  padding: 0 15px;
+}
+.title span {
+  align-self: center;
+  justify-self: end;
+  padding: 0 15px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: 1px solid darkgray;
+  border-bottom: none;
+  border-top: none;
+}
+.wrapper {
+  background: white;
+}
+.wrapper:last-child {
+  border-bottom: 1px solid darkgray;
+}
+button {
+  margin: 5px;
+}
