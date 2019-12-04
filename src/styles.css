@@ -9,6 +9,7 @@ body {
   display: grid;
   grid-template-columns: 3fr 1fr;
   border: 1px solid darkgray;
+  text-align: left;
 }
 .title h3 {
   justify-self: start;
@@ -23,9 +24,13 @@ body {
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
   border: 1px solid darkgray;
   border-bottom: none;
   border-top: none;
+  text-align: left;
+
 }
 .wrapper {
   background: white;

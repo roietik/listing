@@ -60,6 +60,9 @@ class Content extends React.Component {
 
       });
   };
+  handleAdd = () => {
+    console.log('added')
+  }
 
   render() {
     const { isLoaded, items } = this.state;
@@ -84,7 +87,9 @@ class Content extends React.Component {
                 </div>
               </div>
             );
-          })}
+          })
+          }
+          <button className="addBtn" onClick={this.handleAdd}>add</button>
       </>
     );
   }
@@ -101,5 +106,4 @@ function App() {
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 
-// api doc
-// https://jsonplaceholder.typicode.com/guide.html
+// api npm -g json-server
